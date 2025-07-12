@@ -4,9 +4,9 @@
     max-width: 100vw;
     min-height: unset;
     padding: 0;
-    align-items: stretch;
+    align-items: center;
     justify-content: flex-start;
-    margin: 0;
+    margin: 0 0 0 8vw;
     box-sizing: border-box;
     width: 100vw;
     background: #181818;
@@ -21,6 +21,8 @@
     padding: 1.2rem 0.5rem 0.5rem 0.5rem;
     border-radius: 0 0 12px 12px;
     box-shadow: none;
+    align-items: center;
+    text-align: center;
   }
   .content {
     max-width: 100vw;
@@ -29,24 +31,25 @@
     box-shadow: none;
   }
   .app-content {
-    width: 100%;
-    max-width: 420px;
+    width: 88vw;
+    max-width: 260px;
+    min-width: 0;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    padding: 0 0.5rem;
+    padding: 0.1rem 0.1rem;
     overflow-x: hidden;
   }
   .premium-result {
-    width: 100%;
-    max-width: 420px;
+    width: 88vw;
+    max-width: 260px;
     min-width: 0;
-    padding: 0.7rem 0.5rem;
-    margin: 0.7rem auto 0 auto;
-    border-radius: 12px 12px 18px 18px;
+    padding: 0.1rem 0.1rem;
+    margin: 0;
+    border-radius: 18px;
     font-size: 0.93rem;
     flex-direction: column;
     align-items: center;
@@ -55,6 +58,8 @@
     background: linear-gradient(90deg, #23213a 60%, #181818 100%);
     left: 0;
     right: 0;
+    box-shadow: 0 2px 12px #8e7cff22, 0 1.5px 8px #0003;
+    border-top: 1px solid #23213a;
   }
   .premium-result .result-icon {
     width: 30px;
