@@ -38,13 +38,6 @@ function calculateVDrop() {
     percent = '';
   }
   document.getElementById('vdropResult').innerHTML = `<div>${vdrop}</div><div>${percent}</div>`;
-  // Bro, auto-scroll to result on mobile for max UX
-  if (window.innerWidth <= 600) {
-    const resultSection = document.getElementById('resultSection');
-    if (resultSection) {
-      resultSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
 }
 
 document.querySelectorAll('.tab').forEach(tab => {
