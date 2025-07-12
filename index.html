@@ -20,34 +20,30 @@
     </div>
   </header>
   <div class="main-container">
+    <aside class="sidebar">
+      <form id="vdropForm" class="calculator-section">
+        <h3>Voltage Drop Calculator</h3>
+        <label>Phase Type
+          <select id="phaseType">
+            <option value="1">Single Phase</option>
+            <option value="3">Three Phase</option>
+          </select>
+        </label>
+        <input type="number" id="distance" placeholder="Distance D (m)">
+        <input type="number" id="current2" placeholder="Line Current I (A)">
+        <input type="number" id="r" placeholder="R (Ohm per 305m)">
+        <input type="number" id="x" placeholder="X (Ohm per 305m)">
+        <input type="number" id="sysVoltage" placeholder="System Voltage (V)">
+        <button type="button" onclick="calculateVDrop()">Calculate</button>
+      </form>
+    </aside>
     <main class="content">
-      <div class="content-nav">
-        <div class="nav-tabs">
-          <a href="#" class="tab active">Voltage Drop</a>
-        </div>
-      </div>
       <div class="main-content">
         <section class="intro-section">
-          <h2>Voltage Drop Calculator</h2>
-          <p>Calculate voltage drop and percent voltage drop for electrical.</p>
+          <h2>Voltage Drop Result</h2>
+          <p>Result will show here after calculation.</p>
         </section>
-        <section class="calculator-section">
-          <form id="vdropForm">
-            <label>Phase Type
-              <select id="phaseType">
-                <option value="1">Single Phase</option>
-                <option value="3">Three Phase</option>
-              </select>
-            </label>
-            <input type="number" id="distance" placeholder="Distance D (m)">
-            <input type="number" id="current2" placeholder="Line Current I (A)">
-            <input type="number" id="r" placeholder="R (Ohm per 305m)">
-            <input type="number" id="x" placeholder="X (Ohm per 305m)">
-            <input type="number" id="sysVoltage" placeholder="System Voltage (V)">
-            <button type="button" onclick="calculateVDrop()">Calculate</button>
-          </form>
-          <div id="vdropResult"></div>
-        </section>
+        <div id="vdropResult" class="result-box"></div>
         <section class="about-section">
           <h3>About</h3>
           <p>Inspired by premium portfolio design. Built for engineers by engineers.</p>
