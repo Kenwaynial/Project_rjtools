@@ -1,3 +1,55 @@
+/* --- DISCLAIMER --- */
+.disclaimer {
+  width: 100%;
+  text-align: center;
+  color: #aaa;
+  font-size: 0.98rem;
+  margin: 2.5rem 0 0 0;
+  padding: 1.2rem 0 0.5rem 0;
+  border-top: 1px solid #23213a;
+  background: transparent;
+  letter-spacing: 0.1px;
+  font-style: italic;
+  user-select: none;
+}
+/* Bro, this border is now a smooth, cyberpunk loading ring! */
+.premium-result::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: conic-gradient(
+    from 0deg,
+    #8e7cff 0deg 60deg,
+    #6ee7ff 60deg 120deg,
+    #ffb86c 120deg 180deg,
+    #8e7cff 180deg 240deg,
+    #ff4ecd 240deg 300deg,
+    #8e7cff 300deg 360deg
+  );
+  box-shadow: 0 0 16px 4px #8e7cff55, 0 0 32px 8px #6ee7ff33;
+  filter: blur(0.5px) brightness(1.15);
+  z-index: -1;
+  animation: border-spin 2.2s linear infinite, border-glow 1.8s ease-in-out infinite alternate;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  mask:
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+}
+
+@keyframes border-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .premium-result::before {
   content: '';
   position: absolute;
@@ -101,6 +153,10 @@
   100% {
     background-position: 100% 50%;
   }
+}
+@keyframes border-glow {
+  0% { box-shadow: 0 0 16px 4px #8e7cff55, 0 0 32px 8px #6ee7ff33; }
+  100% { box-shadow: 0 0 32px 8px #ffb86c55, 0 0 48px 12px #ff4ecd33; }
 }
 .premium-result .result-icon {
   display: flex;
