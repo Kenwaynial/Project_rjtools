@@ -38,6 +38,11 @@ function calculateVDrop() {
     percent = '';
   }
   document.getElementById('vdropResult').innerHTML = `<div>${vdrop}</div><div>${percent}</div>`;
+  // Bro, auto-scroll to result after calculation
+  const resultSection = document.getElementById('resultSection');
+  if (resultSection) {
+    resultSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 document.querySelectorAll('.tab').forEach(tab => {
