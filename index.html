@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RJ</title>
+  <link rel="stylesheet" href="/core/styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <div class="header-left">
+        <div class="logo">
+          <span>RJ Electrical Tools</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="main-container">
+    <main class="content">
+      <div class="content-nav">
+        <div class="nav-tabs">
+          <a href="#" class="tab active">Voltage Drop</a>
+        </div>
+      </div>
+      <div class="main-content">
+        <section class="intro-section">
+          <h2>Voltage Drop Calculator</h2>
+          <p>Calculate voltage drop and percent voltage drop for electrical.</p>
+        </section>
+        <section class="calculator-section">
+          <form id="vdropForm">
+            <label>Phase Type
+              <select id="phaseType">
+                <option value="1">Single Phase</option>
+                <option value="3">Three Phase</option>
+              </select>
+            </label>
+            <input type="number" id="distance" placeholder="Distance D (m)">
+            <input type="number" id="current2" placeholder="Line Current I (A)">
+            <input type="number" id="r" placeholder="R (Ohm per 305m)">
+            <input type="number" id="x" placeholder="X (Ohm per 305m)">
+            <input type="number" id="sysVoltage" placeholder="System Voltage (V)">
+            <button type="button" onclick="calculateVDrop()">Calculate</button>
+          </form>
+          <div id="vdropResult"></div>
+        </section>
+        <section class="about-section">
+          <h3>About</h3>
+          <p>Inspired by premium portfolio design. Built for engineers by engineers.</p>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script src="/core/scripts/script.js"></script>
+</body>
+</html>
