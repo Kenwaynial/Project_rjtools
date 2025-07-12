@@ -6,6 +6,7 @@ body {
   min-height: 100vh;
 }
 .header {
+  user-select: none;
   background: #111;
   color: #fff;
   padding: 1.2rem 0;
@@ -74,6 +75,7 @@ body {
   margin-bottom: 1.5rem;
 }
 .nav-tabs {
+  user-select: none;
   display: flex;
   gap: 1.2rem;
 }
@@ -90,16 +92,19 @@ body {
   color: #111;
 }
 .main-content {
+  user-select: none;
   flex: 1 1 0;
   margin-top: 1.5rem;
   min-width: 480px;
   max-width: 600px;
 }
 .result-section h2 {
+  user-select: none;
   margin-top: 0;
   color: #fff;
 }
 .calculator-section {
+  user-select: none;
   margin: 2rem 0;
   background: #111;
   border-radius: 10px;
