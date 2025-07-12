@@ -38,12 +38,30 @@
       </form>
     </aside>
     <main class="content">
+      <!-- nav removed as requested -->
       <div class="main-content">
-        <section class="result-section">
+        <section class="result-section" id="result">
           <h2>Voltage Drop Result</h2>
-          <p>Result will show here after calculation.</p>
+          <div id="vdropResult" class="result-box premium-result">
+            <div class="result-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8e7cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8L21 10h-9l1-8z"/></svg>
+            </div>
+            <div class="result-content">
+              <p class="result-main">Result will show here after calculation.</p>
+            </div>
+          </div>
         </section>
-        <div id="vdropResult" class="result-box"></div>
+        <div style="height: 2.5rem;"></div>
+        <div class="solution-align">
+          <h4>Instructions</h4>
+          <div class="solution-steps">
+            <ol>
+              <li>Select if your system is Single Phase or Three Phase.</li>
+              <li>Enter the distance, current, R, X, and voltage values.</li>
+              <li>Click Calculate to see the voltage drop and percent drop.</li>
+            </ol>
+          </div>
+        </div>
       </div>
     </main>
   </div>
