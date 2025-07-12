@@ -31,12 +31,12 @@
   .main-content {
     min-width: 0;
     max-width: 100vw;
+    width: 100%;
     margin: 0.3rem auto 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100vw;
     box-sizing: border-box;
     padding: 0;
   }
