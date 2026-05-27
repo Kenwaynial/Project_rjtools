@@ -8,7 +8,6 @@ const tools = [
     desc: 'Calculate voltage drop across conductors for single and three phase systems.',
     icon: Zap,
     color: 'from-primary to-accent',
-    stats: '1.2k uses',
   },
   {
     id: 'shortcircuit',
@@ -16,7 +15,6 @@ const tools = [
     desc: 'Compute symmetrical RMS fault current and suggested breaker KAIC ratings.',
     icon: ShieldCheck,
     color: 'from-accent to-amber',
-    stats: '856 uses',
   },
 ]
 
