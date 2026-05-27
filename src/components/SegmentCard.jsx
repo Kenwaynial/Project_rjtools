@@ -4,70 +4,64 @@ export default function SegmentCard({ index, segment, onUpdate, onRemove, canRem
   const sizes = Object.entries(C_VALUES[segment.conduitType || 'steel'])
 
   return (
-    <div className="bg-[#1a1a2a] border border-[#333355] rounded-lg p-4 flex flex-col gap-3">
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-mono font-medium text-[#3b82f6]">Segment {index + 1}</span>
+    <div className="bg-[#121212] border border-white/[0.05] rounded-lg p-3 hover:border-primary/20 transition-all duration-200">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wider">Segment {index + 1}</span>
         {canRemove && (
-          <button onClick={onRemove} className="text-xs text-[#ef4444] hover:text-[#f87171] transition-colors">
+          <button onClick={onRemove} className="text-[0.55rem] font-semibold text-red-500/70 hover:text-red-400 transition-colors uppercase tracking-wider">
             Remove
           </button>
         )}
       </div>
 
-      <div className="flex gap-2">
-        <div className="flex-1 flex flex-col gap-1">
-          <label className="text-[0.65rem] font-medium text-[#8888aa] uppercase tracking-wide">Length</label>
+      <div className="grid grid-cols-3 gap-2 mb-2.5">
+        <div className="col-span-2">
+          <label className="label-sm block mb-0.5">Length</label>
           <input
             type="number"
             value={segment.len}
             onChange={e => onUpdate('len', e.target.value)}
-            placeholder="Length"
-            className="bg-[#1a1a2a] border border-[#333355] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] outline-none placeholder:text-[#555577] focus:border-[#3b82f6] transition-colors w-full"
+            placeholder="0"
+            className="input-field"
           />
         </div>
-
-        <div className="w-[110px] flex flex-col gap-1">
-          <label className="text-[0.65rem] font-medium text-[#8888aa] uppercase tracking-wide">Parallels (n)</label>
+        <div className="col-span-1">
+          <label className="label-sm block mb-0.5">Parallels</label>
           <input
             type="number"
             value={segment.n}
             onChange={e => onUpdate('n', e.target.value)}
             min="1"
-            placeholder="n"
-            className="bg-[#1a1a2a] border border-[#333355] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] outline-none placeholder:text-[#555577] focus:border-[#3b82f6] transition-colors w-full"
+            placeholder="1"
+            className="input-field"
           />
         </div>
       </div>
 
-      <div className="flex gap-2">
-        <div className="flex-1 flex flex-col gap-1">
-          <label className="text-[0.65rem] font-medium text-[#8888aa] uppercase tracking-wide">Conduit Type</label>
+      <div className="grid grid-cols-2 gap-2">
+        <div>
+          <label className="label-sm block mb-0.5">Conduit</label>
           <select
             value={segment.conduitType || 'steel'}
             onChange={e => onUpdate('conduitType', e.target.value)}
-            className="bg-[#1a1a2a] border border-[#333355] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] outline-none focus:border-[#3b82f6] transition-colors cursor-pointer"
+            className="input-field select-arrow cursor-pointer"
           >
             <option value="steel">Steel</option>
-            <option value="nonmagnetic">Non-Magnetic</option>
+            <option value="nonmagnetic">Non-Mag</option>
           </select>
         </div>
-
-        <div className="flex-[2] flex flex-col gap-1">
-          <label className="text-[0.65rem] font-medium text-[#8888aa] uppercase tracking-wide">C Value</label>
-          <div className="flex gap-2">
-            <select
-              value={segment.c || ''}
-              onChange={e => {
-                if (e.target.value) onUpdate('c', Number(e.target.value))
-              }}
-              className="bg-[#1a1a2a] border border-[#333355] rounded-lg px-3 py-2 text-sm text-[#f0f0f5] outline-none focus:border-[#3b82f6] transition-colors cursor-pointer min-w-0 flex-1"
-            >
-              <option value="">Select conductor...</option>
-              {sizes.map(([name, val]) => (
-                <option key={name} value={val}>{name} — {val.toLocaleString()}</option>
-              ))}
-            </select>
-          </div>
+        <div>
+          <label className="label-sm block mb-0.5">C Value</label>
+          <select
+            value={segment.c || ''}
+            onChange={e => { if (e.target.value) onUpdate('c', Number(e.target.value)) }}
+            className="input-field select-arrow cursor-pointer"
+          >
+            <option value="">Select...</option>
+            {sizes.map(([name, val]) => (
+              <option key={name} value={val}>{name} — {val.toLocaleString()}</option>
+            ))}
+          </select>
         </div>
       </div>
     </div>

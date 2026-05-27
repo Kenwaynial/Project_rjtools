@@ -1,3 +1,4 @@
+import { Plus, Triangle, Cable } from 'lucide-react'
 import SegmentCard from './SegmentCard.jsx'
 
 export default function ShortCircuitForm({
@@ -5,85 +6,103 @@ export default function ShortCircuitForm({
   onSegmentAdd, onSegmentRemove, onCalculate,
 }) {
   return (
-    <>
-      <h3 className="text-base font-semibold text-[#f0f0f5] mb-2">Short Circuit Calculator</h3>
-
-      <div className="flex gap-3">
-        <div className="flex-1 flex flex-col gap-1">
-          <label className="text-xs font-medium text-[#8888aa] uppercase tracking-wide">Unit</label>
-          <select
-            value={values.unit}
-            onChange={e => onChange('unit', e.target.value)}
-            className="bg-[#1a1a2a] border border-[#333355] rounded-lg px-3 py-2.5 text-sm text-[#f0f0f5] outline-none focus:border-[#3b82f6] transition-colors cursor-pointer"
-          >
-            <option value="ft">Feet</option>
-            <option value="m">Meters</option>
-          </select>
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-2 mb-1">
+        <div className="w-6 h-6 rounded bg-primary/10 border border-primary/25 flex items-center justify-center">
+          <Triangle size={12} className="text-primary" />
         </div>
-        <div className="flex-1 flex flex-col gap-1">
-          <label className="text-xs font-medium text-[#8888aa] uppercase tracking-wide">Z Factor</label>
-          <input
-            type="number"
-            value={values.zFactor}
-            onChange={e => onChange('zFactor', e.target.value)}
-            min="0.8" max="1.2" step="0.05"
-            className="bg-[#1a1a2a] border border-[#333355] rounded-lg px-3 py-2.5 text-sm text-[#f0f0f5] outline-none focus:border-[#3b82f6] transition-colors"
-          />
-        </div>
+        <h3 className="text-xs font-semibold text-white tracking-wide uppercase">Short Circuit Inputs</h3>
       </div>
 
-      <div className="h-px bg-[#333355] my-1" />
-
-      <h4 className="text-sm font-semibold text-[#3b82f6]">Transformer</h4>
-
-      <div className="flex gap-3">
-        {[
-          { key: 'kva', label: 'kVA', placeholder: '500' },
-          { key: 'vll', label: 'VLL (V)', placeholder: '400' },
-          { key: 'pctZ', label: '%Z', placeholder: '5.75' },
-        ].map(f => (
-          <div key={f.key} className="flex-1 flex flex-col gap-1">
-            <label className="text-[0.65rem] font-medium text-[#8888aa] uppercase tracking-wide">{f.label}</label>
+      {/* System Settings Group */}
+      <div className="bg-[#050505]/60 border border-white/[0.04] p-3 rounded-lg flex flex-col gap-2.5">
+        <span className="text-[0.6rem] font-semibold text-primary/80 uppercase tracking-wide">System Settings</span>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="label-sm block mb-1">Unit</label>
+            <select
+              value={values.unit}
+              onChange={e => onChange('unit', e.target.value)}
+              className="input-field select-arrow cursor-pointer"
+            >
+              <option value="ft">Feet</option>
+              <option value="m">Meters</option>
+            </select>
+          </div>
+          <div>
+            <label className="label-sm block mb-1">Z Factor</label>
             <input
               type="number"
-              value={values[f.key]}
-              onChange={e => onChange(f.key, e.target.value)}
-              placeholder={f.placeholder}
-              className="bg-[#1a1a2a] border border-[#333355] rounded-lg px-3 py-2.5 text-sm text-[#f0f0f5] outline-none placeholder:text-[#555577] focus:border-[#3b82f6] transition-colors"
+              value={values.zFactor}
+              onChange={e => onChange('zFactor', e.target.value)}
+              min="0.8" max="1.2" step="0.05"
+              className="input-field"
             />
           </div>
-        ))}
+        </div>
       </div>
 
-      <div className="h-px bg-[#333355] my-1" />
+      {/* Transformer Section */}
+      <div className="bg-[#050505]/60 border border-white/[0.04] p-3 rounded-lg flex flex-col gap-2.5">
+        <span className="text-[0.6rem] font-semibold text-primary/80 uppercase tracking-wide">Transformer Base</span>
+        <div className="grid grid-cols-3 gap-2">
+          {[
+            { key: 'kva', label: 'kVA' },
+            { key: 'vll', label: 'VLL (V)' },
+            { key: 'pctZ', label: '%Z' },
+          ].map(f => (
+            <div key={f.key}>
+              <label className="label-sm block mb-1">{f.label}</label>
+              <input
+                type="number"
+                value={values[f.key]}
+                onChange={e => onChange(f.key, e.target.value)}
+                placeholder="0"
+                className="input-field"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
 
-      <div className="flex items-center justify-between">
-        <h4 className="text-sm font-semibold text-[#3b82f6]">Cable Segments</h4>
+      {/* Cable Segments Section */}
+      <div className="bg-[#050505]/60 border border-white/[0.04] p-3 rounded-lg flex flex-col gap-2.5">
+        <div className="flex items-center gap-2 mb-1">
+          <Cable size={12} className="text-primary/75" />
+          <span className="text-[0.6rem] font-semibold text-primary/80 uppercase tracking-wide">Conductor Segments</span>
+        </div>
+
+        <div className="flex flex-col gap-2.5 max-h-[220px] overflow-y-auto pr-1">
+          {segments.map((seg, idx) => (
+            <SegmentCard
+              key={seg.id}
+              index={idx}
+              segment={seg}
+              onUpdate={(field, val) => onSegmentUpdate(seg.id, field, val)}
+              onRemove={() => onSegmentRemove(seg.id)}
+              canRemove={segments.length > 1}
+            />
+          ))}
+        </div>
+
+        {/* Highly Visible Dash Add Button */}
         <button
+          type="button"
           onClick={onSegmentAdd}
-          className="text-xs text-[#3b82f6] hover:text-[#60a5fa] transition-colors font-medium"
+          className="w-full flex items-center justify-center gap-2 py-2 px-3 border border-dashed border-primary/30 hover:border-primary hover:bg-primary/5 rounded-lg text-primary text-xs font-semibold tracking-wide transition-all select-none cursor-pointer mt-1"
         >
-          + Add Segment
+          <Plus size={14} />
+          <span>Add Cable Segment</span>
         </button>
       </div>
 
-      {segments.map((seg, idx) => (
-        <SegmentCard
-          key={seg.id}
-          index={idx}
-          segment={seg}
-          onUpdate={(field, val) => onSegmentUpdate(seg.id, field, val)}
-          onRemove={() => onSegmentRemove(seg.id)}
-          canRemove={segments.length > 1}
-        />
-      ))}
-
       <button
         onClick={onCalculate}
-        className="mt-2 py-2.5 rounded-lg text-sm font-semibold bg-[#3b82f6] text-white hover:bg-[#2563eb] shadow-lg shadow-[#3b82f6]/20 transition-all active:scale-[0.98]"
+        className="btn-primary w-full mt-1.5"
       >
-        Calculate
+        <Triangle size={12} className="opacity-80 rotate-90" />
+        <span>Calculate</span>
       </button>
-    </>
+    </div>
   )
 }

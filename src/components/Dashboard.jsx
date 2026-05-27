@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Zap, ShieldCheck, ArrowRight, BarChart3, FileOutput, History } from 'lucide-react'
+import { Zap, ShieldCheck, ArrowRight } from 'lucide-react'
 
 const tools = [
   {
@@ -7,8 +7,7 @@ const tools = [
     title: 'Voltage Drop',
     desc: 'Calculate voltage drop across conductors for single and three phase systems.',
     icon: Zap,
-    color: 'from-blue-500 to-cyan-500',
-    badge: 'Popular',
+    color: 'from-primary to-accent',
     stats: '1.2k uses',
   },
   {
@@ -16,18 +15,14 @@ const tools = [
     title: 'Short Circuit',
     desc: 'Compute symmetrical RMS fault current and suggested breaker KAIC ratings.',
     icon: ShieldCheck,
-    color: 'from-purple-500 to-pink-500',
-    badge: 'Pro',
+    color: 'from-accent to-amber',
     stats: '856 uses',
   },
 ]
 
 const container = {
   hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
+  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
 }
 
 const item = {
@@ -42,22 +37,22 @@ export default function Dashboard({ onNavigate, searchQuery }) {
 
   return (
     <div className="flex-1 flex flex-col">
-      <div className="max-w-[1000px] mx-auto w-full px-6 pt-12 pb-8">
+      <div className="max-w-[1000px] mx-auto w-full px-6 pt-16 pb-8">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-10"
+          className="mb-12"
         >
-          <h1 className="text-3xl font-bold text-white tracking-tight">Electrical Tools</h1>
-          <p className="text-muted text-sm mt-1.5">Select a tool to get started with your calculations.</p>
+          <h1 className="text-4xl font-bold text-white tracking-tight">Electrical Tools</h1>
+          <p className="text-muted text-sm mt-2">Select a tool to get started with your calculations.</p>
         </motion.div>
 
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4"
         >
           {filtered.map(tool => {
             const Icon = tool.icon
@@ -65,30 +60,25 @@ export default function Dashboard({ onNavigate, searchQuery }) {
               <motion.button
                 key={tool.id}
                 variants={item}
-                whileHover={{ scale: 1.02, y: -2 }}
+                whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onNavigate(tool.id)}
-                className="glass glass-hover rounded-xl p-6 text-left group cursor-pointer"
+                className="group cursor-pointer text-left"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${tool.color} flex items-center justify-center shadow-lg`}>
-                    <Icon size={20} className="text-white" />
+                <div className="bg-[#0d0d0d] border border-white/[0.06] rounded-xl p-6 hover:border-primary/20 hover:bg-[#171717] transition-all duration-200">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${tool.color} flex items-center justify-center`}>
+                      <Icon size={18} className="text-white" />
+                    </div>
+                    <span className="text-xs text-muted">{tool.stats}</span>
                   </div>
-                  {tool.badge && (
-                    <span className="text-[0.65rem] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/20">
-                      {tool.badge}
-                    </span>
-                  )}
-                </div>
 
-                <h3 className="text-base font-semibold text-white mb-1.5">{tool.title}</h3>
-                <p className="text-sm text-muted leading-relaxed mb-4">{tool.desc}</p>
+                  <h3 className="text-base font-semibold text-white mb-1.5">{tool.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed mb-4">{tool.desc}</p>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-muted">{tool.stats}</span>
-                  <span className="flex items-center gap-1 text-xs font-medium text-primary group-hover:gap-2 transition-all">
-                    Open Tool <ArrowRight size={12} />
-                  </span>
+                  <div className="flex items-center gap-1 text-xs font-medium text-primary group-hover:gap-2 transition-all">
+                    Open Tool <ArrowRight size={11} />
+                  </div>
                 </div>
               </motion.button>
             )
@@ -97,7 +87,9 @@ export default function Dashboard({ onNavigate, searchQuery }) {
 
         {filtered.length === 0 && (
           <div className="text-center py-16">
-            <BarChart3 size={32} className="mx-auto text-muted mb-3 opacity-50" />
+            <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center mx-auto mb-3">
+              <svg className="w-5 h-5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </div>
             <p className="text-muted text-sm">No tools match your search.</p>
           </div>
         )}
@@ -105,11 +97,7 @@ export default function Dashboard({ onNavigate, searchQuery }) {
 
       <div className="mt-auto border-t border-white/[0.06] py-4 px-6">
         <div className="max-w-[1000px] mx-auto flex items-center justify-between text-xs text-muted">
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5"><FileOutput size={12} /> v2.0</span>
-            <span className="flex items-center gap-1.5"><History size={12} /> Last calc saved</span>
-          </div>
-          <span className="text-white/30">RJ Electrical Tools</span>
+          <span className="text-white/20">RJ Electrical Tools v2.0</span>
         </div>
       </div>
     </div>
