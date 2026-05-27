@@ -9,9 +9,7 @@ export default function StepsPanel({ scResult }) {
   if (steps.length >= 3) {
     groups.push({
       point: steps[2].var,
-      label: results?.[0]?.label || 'Transformer Terminals',
-      result: steps[2].result,
-      kaic: results?.[0]?.suggestedKAIC || null,
+      label: 'Transformer Terminals',
       substeps: [steps[0], steps[1]],
       mainStep: steps[2],
     })
@@ -19,12 +17,9 @@ export default function StepsPanel({ scResult }) {
   let i = 3
   let segIdx = 1
   while (i + 2 < steps.length) {
-    const res = results?.[segIdx]
     groups.push({
       point: steps[i + 2].var,
-      label: res?.label || `After Segment ${segIdx}`,
-      result: steps[i + 2].result,
-      kaic: res?.suggestedKAIC || null,
+      label: `Fault ${segIdx + 1}`,
       substeps: [steps[i], steps[i + 1]],
       mainStep: steps[i + 2],
     })
@@ -48,20 +43,10 @@ export default function StepsPanel({ scResult }) {
             transition={{ delay: idx * 0.04, duration: 0.2 }}
             className="group"
           >
-            <div className="bg-slate-50/60 dark:bg-slate-800/20 border border-slate-200/60 dark:border-slate-700/40 rounded-lg px-4 py-2.5 hover:border-primary/20 dark:hover:border-primary/20 transition-all">
-              <div className="flex items-center justify-between mb-2">
+            <div className="bg-slate-50/60 dark:bg-slate-800/20 border border-slate-200/60 dark:border-slate-700/40 rounded-lg px-4 py-2.5 hover:scale-[1.015] hover:shadow-md hover:border-primary/30 dark:hover:border-primary/30 transition-all duration-200">
+              <div className="mb-2">
                 <span className="text-xs font-bold text-primary tracking-wide">
-                  {g.point} &mdash; {g.label}
-                </span>
-                <span className="flex items-center gap-2 shrink-0">
-                  <span className="font-mono text-xs font-bold text-slate-900 dark:text-slate-100">
-                    {g.result}
-                  </span>
-                  {g.kaic && (
-                    <span className="text-[0.6rem] font-bold text-green bg-green/10 border border-green/20 rounded-md px-1.5 py-0.5">
-                      {g.kaic} KAIC
-                    </span>
-                  )}
+                  {g.point} <span className="text-slate-400 dark:text-slate-500 font-normal">&mdash;</span> {g.label}
                 </span>
               </div>
 
@@ -80,7 +65,7 @@ export default function StepsPanel({ scResult }) {
                   <span className="text-amber mx-1">=</span>
                   <span className="text-slate-600 dark:text-slate-400 break-all">{g.mainStep.expr}</span>
                   <span className="text-amber mx-1">=</span>
-                  <span className="text-green font-bold">{g.result}</span>
+                  <span className="text-green font-bold">{g.mainStep.result}</span>
                 </div>
               </div>
             </div>
