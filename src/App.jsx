@@ -1,14 +1,18 @@
 import { useState, useCallback } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import Header from './components/Header.jsx'
 import SidePanel from './components/SidePanel.jsx'
 import MainPanel from './components/MainPanel.jsx'
+import Dashboard from './components/Dashboard.jsx'
+import Disclaimer from './components/Disclaimer.jsx'
 import { calculateVDrop } from './utils/calculateVDrop.js'
 import { calculateSC } from './utils/calculateSC.js'
 
 let nextId = 1
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('vdrop')
+  const [view, setView] = useState('dashboard')
+  const [searchQuery, setSearchQuery] = useState('')
 
   const [vdValues, setVdValues] = useState({
     phaseType: 3, distance: '', current: '', r: '', x: '', sysVoltage: '',
@@ -22,6 +26,11 @@ export default function App() {
     { id: 0, len: '', c: '', n: 1, conduitType: 'steel' },
   ])
   const [scResult, setScResult] = useState(null)
+
+  const navigate = useCallback((target) => {
+    setView(target)
+    setSearchQuery('')
+  }, [])
 
   const handleVdCalculate = useCallback(() => {
     const { phaseType, distance, current, r, x, sysVoltage } = vdValues
@@ -71,37 +80,59 @@ export default function App() {
     setScValues(prev => ({ ...prev, [field]: value }))
   }, [])
 
+  const activeTab = view === 'vdrop' ? 'vdrop' : 'shortcircuit'
+
   return (
-    <div className="min-h-screen bg-[#1a1a2a] flex flex-col">
-      <Header activeTab={activeTab} onTabChange={setActiveTab} hasResult={!!(vdResult || scResult)} />
+    <div className="min-h-screen bg-dark-bg flex flex-col">
+      <Header view={view} onNavigate={navigate} onSearch={setSearchQuery} />
 
-      <div className="flex-1 flex max-w-[1400px] mx-auto w-full px-6 gap-0 pt-5 pb-6">
-        <SidePanel
-          activeTab={activeTab}
-          vdValues={vdValues}
-          onVdChange={handleVdChange}
-          onVdCalculate={handleVdCalculate}
-          scValues={scValues}
-          onScChange={handleScChange}
-          segments={segments}
-          onSegmentUpdate={updateSegment}
-          onSegmentAdd={addSegment}
-          onSegmentRemove={removeSegment}
-          onScCalculate={handleScCalculate}
-        />
+      <AnimatePresence mode="wait">
+        {view === 'dashboard' ? (
+          <motion.div
+            key="dashboard"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="flex-1 flex"
+          >
+            <Dashboard onNavigate={navigate} searchQuery={searchQuery} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="flex-1 flex max-w-[1400px] mx-auto w-full px-6 gap-0 pt-5 pb-6"
+          >
+            <SidePanel
+              activeTab={activeTab}
+              vdValues={vdValues}
+              onVdChange={handleVdChange}
+              onVdCalculate={handleVdCalculate}
+              scValues={scValues}
+              onScChange={handleScChange}
+              segments={segments}
+              onSegmentUpdate={updateSegment}
+              onSegmentAdd={addSegment}
+              onSegmentRemove={removeSegment}
+              onScCalculate={handleScCalculate}
+            />
 
-        <MainPanel
-          activeTab={activeTab}
-          vdResult={vdResult}
-          scResult={scResult}
-          vdValues={vdValues}
-          segments={segments}
-        />
-      </div>
+            <MainPanel
+              activeTab={activeTab}
+              vdResult={vdResult}
+              scResult={scResult}
+              vdValues={vdValues}
+              segments={segments}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <footer className="text-center text-xs text-[#555577] italic border-t border-[#2a2a45] py-3 px-4 mt-auto opacity-70 select-none">
-        Disclaimer: This tool is for informational purposes only. Always verify results with a licensed professional before making electrical decisions. No liability for errors or misuse.
-      </footer>
+      <Disclaimer />
     </div>
   )
 }
