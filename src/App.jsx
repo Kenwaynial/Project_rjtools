@@ -20,7 +20,7 @@ export default function App() {
   const [vdResult, setVdResult] = useState(null)
 
   const [scValues, setScValues] = useState({
-    kva: '', vll: '', pctZ: '', zFactor: 0.9, unit: 'ft',
+    kva: '', vll: '', pctZ: '', zFactor: 0.9, unit: 'ft', phaseType: 3,
   })
   const [segments, setSegments] = useState([
     { id: 0, len: '', c: '', n: 1, conduitType: 'steel' },
@@ -44,11 +44,11 @@ export default function App() {
   }, [vdValues])
 
   const handleScCalculate = useCallback(() => {
-    const { kva, vll, pctZ, zFactor, unit } = scValues
+    const { kva, vll, pctZ, zFactor, unit, phaseType } = scValues
     if (!kva || !vll || !pctZ) return
     const result = calculateSC({
       kva: Number(kva), vll: Number(vll), pctZ: Number(pctZ),
-      zFactor: Number(zFactor),
+      zFactor: Number(zFactor), phaseType: Number(phaseType),
       segments: segments.map(s => ({
         len: s.len ? Number(s.len) : 0,
         c: s.c ? Number(s.c) : 0,

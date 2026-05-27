@@ -11,17 +11,24 @@ export function suggestKAIC(isc) {
 }
 
 export function calculateSC(values) {
-  const { kva, vll, pctZ, zFactor, segments } = values;
+  const { kva, vll, pctZ, zFactor, segments, phaseType } = values;
   if (!kva || !vll || !pctZ) return null;
 
+  const isThreePhase = phaseType === 3 || !phaseType;
   const sqrt3 = 1.7320508;
-  const itr = (kva * 1000) / (sqrt3 * vll);
+  const cableFactor = isThreePhase ? sqrt3 : 2;
+  const itr = isThreePhase
+    ? (kva * 1000) / (sqrt3 * vll)
+    : (kva * 1000) / vll;
   const m1 = 100 / (pctZ * zFactor);
   const isc1 = itr * m1;
 
+  const phaseSymbol = isThreePhase ? '√3' : '2';
+  const denominatorSymbol = isThreePhase ? `(√3 × ${fmt(vll)})` : `${fmt(vll)}`;
+
   const results = [{ point: 'F1', isc: isc1, label: 'Transformer' }];
   const steps = [
-    { var: 'I_tr', expr: `${fmt(kva)} × 1000 / (√3 × ${fmt(vll)})`, result: `${fmt(itr, 2)} A` },
+    { var: 'I_tr', expr: `${fmt(kva)} × 1000 / ${denominatorSymbol}`, result: `${fmt(itr, 2)} A` },
     { var: 'M₁', expr: `100 / (${pctZ} × ${zFactor})`, result: `${fmt(m1, 3)}` },
     { var: 'F₁', expr: `${fmt(itr, 2)} × ${fmt(m1, 3)}`, result: `${fmt(isc1, 2)} A` },
   ];
@@ -32,13 +39,13 @@ export function calculateSC(values) {
     if (!seg.len || !seg.c) continue;
     const len = seg.unit === 'm' ? seg.len * 3.28084 : seg.len;
     const pt = `F${i + 2}`;
-    const f = (sqrt3 * len * iscPrev) / (seg.c * seg.n * vll);
+    const f = (cableFactor * len * iscPrev) / (seg.c * seg.n * vll);
     const m = 1 / (1 + f);
     const iscNext = iscPrev * m;
 
     steps.push({
       var: `F${i + 2}`,
-      expr: `√3 × ${fmt(seg.len, 1)} × ${fmt(iscPrev, 2)} / (${fmt(seg.c)} × ${seg.n} × ${fmt(vll)})`,
+      expr: `${phaseSymbol} × ${fmt(seg.len, 1)} × ${fmt(iscPrev, 2)} / (${fmt(seg.c)} × ${seg.n} × ${fmt(vll)})`,
       result: `${fmt(f, 3)}`,
       sub: true,
     });

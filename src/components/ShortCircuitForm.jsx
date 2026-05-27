@@ -17,7 +17,18 @@ export default function ShortCircuitForm({
       {/* System Settings Group */}
       <div className="bg-slate-50/60 border border-slate-200/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
         <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">System Settings</span>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-2">
+          <div>
+            <label className="label-sm block mb-1">Phase</label>
+            <select
+              value={values.phaseType}
+              onChange={e => onChange('phaseType', e.target.value)}
+              className="input-field select-arrow cursor-pointer"
+            >
+              <option value={3}>3-Phase</option>
+              <option value={1}>1-Phase</option>
+            </select>
+          </div>
           <div>
             <label className="label-sm block mb-1">Unit</label>
             <select
@@ -48,7 +59,7 @@ export default function ShortCircuitForm({
         <div className="grid grid-cols-3 gap-2">
           {[
             { key: 'kva', label: 'kVA' },
-            { key: 'vll', label: 'VLL (V)' },
+            { key: 'vll', label: values.phaseType == 1 ? 'Voltage (V)' : 'VLL (V)' },
             { key: 'pctZ', label: '%Z' },
           ].map(f => (
             <div key={f.key}>
