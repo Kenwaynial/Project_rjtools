@@ -11,11 +11,10 @@ export default function ShortCircuitForm({
         <div className="w-6 h-6 rounded bg-primary/10 border border-primary/25 flex items-center justify-center">
           <Triangle size={12} className="text-primary" />
         </div>
-        <h3 className="text-xs font-semibold text-slate-800 tracking-wide uppercase">Short Circuit Inputs</h3>
+        <h3 className="text-xs font-semibold text-slate-800 dark:text-slate-100 tracking-wide uppercase">Short Circuit Inputs</h3>
       </div>
 
-      {/* System Settings Group */}
-      <div className="bg-slate-50/60 border border-slate-200/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
+      <div className="bg-slate-50/60 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-700/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
         <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">System Settings</span>
         <div className="grid grid-cols-3 gap-2">
           <div>
@@ -53,8 +52,7 @@ export default function ShortCircuitForm({
         </div>
       </div>
 
-      {/* Transformer Section */}
-      <div className="bg-slate-50/60 border border-slate-200/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
+      <div className="bg-slate-50/60 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-700/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
         <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">Transformer Base</span>
         <div className="grid grid-cols-3 gap-2">
           {[
@@ -76,8 +74,7 @@ export default function ShortCircuitForm({
         </div>
       </div>
 
-      {/* Cable Segments Section */}
-      <div className="bg-slate-50/60 border border-slate-200/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
+      <div className="bg-slate-50/60 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-700/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
         <div className="flex items-center gap-2 mb-1">
           <Cable size={12} className="text-primary/75" />
           <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">Conductor Segments</span>
@@ -96,11 +93,10 @@ export default function ShortCircuitForm({
           ))}
         </div>
 
-        {/* Highly Visible Dash Add Button */}
         <button
           type="button"
           onClick={onSegmentAdd}
-          className="w-full flex items-center justify-center gap-2 py-2 px-3 border border-dashed border-primary/30 hover:border-primary hover:bg-primary/5 rounded-lg text-primary text-xs font-semibold tracking-wide transition-all select-none cursor-pointer mt-1"
+          className="w-full flex items-center justify-center gap-2 py-2 px-3 border border-dashed border-primary/30 hover:border-primary hover:bg-primary/5 dark:hover:bg-primary/10 rounded-lg text-primary text-xs font-semibold tracking-wide transition-all select-none cursor-pointer mt-1"
         >
           <Plus size={14} />
           <span>Add Cable Segment</span>
@@ -111,7 +107,6 @@ export default function ShortCircuitForm({
         onClick={onCalculate}
         className="btn-primary w-full mt-1.5"
       >
-        <Triangle size={12} className="opacity-80 rotate-90" />
         <span>Calculate</span>
       </button>
     </div>

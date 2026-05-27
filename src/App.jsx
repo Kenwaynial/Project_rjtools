@@ -1,16 +1,31 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Header from './components/Header.jsx'
 import SidePanel from './components/SidePanel.jsx'
 import MainPanel from './components/MainPanel.jsx'
 import Dashboard from './components/Dashboard.jsx'
-import Disclaimer from './components/Disclaimer.jsx'
+import SplashScreen from './components/SplashScreen.jsx'
 import { calculateVDrop } from './utils/calculateVDrop.js'
 import { calculateSC } from './utils/calculateSC.js'
 
 let nextId = 1
 
 export default function App() {
+  const [agreed, setAgreed] = useState(false)
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('rj-tools-theme')
+    return saved || 'dark'
+  })
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem('rj-tools-theme', theme)
+  }, [theme])
+
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
+  }, [])
+
   const [view, setView] = useState('dashboard')
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -83,56 +98,64 @@ export default function App() {
   const activeTab = view === 'vdrop' ? 'vdrop' : 'shortcircuit'
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] flex flex-col">
-      <Header view={view} onNavigate={navigate} onSearch={setSearchQuery} />
+    <>
+      {!agreed && <SplashScreen onAgree={() => setAgreed(true)} />}
 
-      <AnimatePresence mode="wait">
-        {view === 'dashboard' ? (
-          <motion.div
-            key="dashboard"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="flex-1 flex"
-          >
-            <Dashboard onNavigate={navigate} searchQuery={searchQuery} />
-          </motion.div>
-        ) : (
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="flex-1 flex max-w-[1400px] mx-auto w-full px-6 gap-0 pt-5 pb-6"
-          >
-            <SidePanel
-              activeTab={activeTab}
-              vdValues={vdValues}
-              onVdChange={handleVdChange}
-              onVdCalculate={handleVdCalculate}
-              scValues={scValues}
-              onScChange={handleScChange}
-              segments={segments}
-              onSegmentUpdate={updateSegment}
-              onSegmentAdd={addSegment}
-              onSegmentRemove={removeSegment}
-              onScCalculate={handleScCalculate}
-            />
+      <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] flex flex-col">
+        <Header
+          view={view}
+          onNavigate={navigate}
+          onSearch={setSearchQuery}
+          theme={theme}
+          onToggleTheme={toggleTheme}
+        />
 
-            <MainPanel
-              activeTab={activeTab}
-              vdResult={vdResult}
-              scResult={scResult}
-              vdValues={vdValues}
-              segments={segments}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <AnimatePresence mode="wait">
+          {view === 'dashboard' ? (
+            <motion.div
+              key="dashboard"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="flex-1 flex"
+            >
+              <Dashboard onNavigate={navigate} searchQuery={searchQuery} />
+            </motion.div>
+          ) : (
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              className="flex-1 flex max-w-[1400px] mx-auto w-full px-6 gap-0 pt-5 pb-6"
+            >
+              <SidePanel
+                activeTab={activeTab}
+                vdValues={vdValues}
+                onVdChange={handleVdChange}
+                onVdCalculate={handleVdCalculate}
+                scValues={scValues}
+                onScChange={handleScChange}
+                segments={segments}
+                onSegmentUpdate={updateSegment}
+                onSegmentAdd={addSegment}
+                onSegmentRemove={removeSegment}
+                onScCalculate={handleScCalculate}
+              />
 
-      <Disclaimer />
-    </div>
+              <MainPanel
+                activeTab={activeTab}
+                vdResult={vdResult}
+                scResult={scResult}
+                vdValues={vdValues}
+                segments={segments}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   )
 }

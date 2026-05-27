@@ -6,15 +6,15 @@ export default function FaultCards({ results }) {
       {results.map((r, i) => (
         <div
           key={i}
-          className="bg-[#22223a] border border-[#333355] rounded-lg p-4 hover:border-[#3b82f6]/30 transition-colors"
+          className="bg-white dark:bg-[#22223a] border border-slate-200 dark:border-[#333355] rounded-lg p-4 hover:border-primary/30 dark:hover:border-[#3b82f6]/30 transition-colors"
         >
           <div className="flex items-center gap-2 mb-1">
-            <span className="font-mono text-xs font-semibold text-[#3b82f6]">{r.point}</span>
-            <span className="text-[0.65rem] text-[#8888aa]">{r.label}</span>
+            <span className="font-mono text-xs font-semibold text-primary">{r.point}</span>
+            <span className="text-[0.65rem] text-slate-500 dark:text-[#8888aa]">{r.label}</span>
           </div>
-          <div className="font-mono text-base font-semibold text-[#f0f0f5]">{fmt(r.isc, 2)} A</div>
+          <div className="font-mono text-base font-semibold text-slate-900 dark:text-[#f0f0f5]">{fmt(r.isc, 2)} A</div>
           {r.suggestedKAIC && (
-            <div className="text-xs text-[#22c55e] mt-1">→ {r.suggestedKAIC} KAIC</div>
+            <div className="text-xs text-green mt-1">→ {r.suggestedKAIC} KAIC</div>
           )}
         </div>
       ))}

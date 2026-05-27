@@ -4,7 +4,7 @@ export default function SegmentCard({ index, segment, onUpdate, onRemove, canRem
   const sizes = Object.entries(C_VALUES[segment.conduitType || 'steel'])
 
   return (
-    <div className="bg-white border border-slate-200/80 rounded-lg p-3 hover:border-primary/30 transition-all duration-200 shadow-sm">
+    <div className="bg-white dark:bg-[#1e293b] border border-slate-200/80 dark:border-slate-700/80 rounded-lg p-3 hover:border-primary/30 transition-all duration-200 shadow-sm">
       <div className="flex items-center justify-between mb-2">
         <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wider">Segment {index + 1}</span>
         {canRemove && (

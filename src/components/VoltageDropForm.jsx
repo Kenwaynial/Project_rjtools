@@ -1,7 +1,5 @@
 import { Calculator } from 'lucide-react'
 
-
-
 export default function VoltageDropForm({ values, onChange, onCalculate }) {
   return (
     <div className="flex flex-col gap-4">
@@ -9,7 +7,7 @@ export default function VoltageDropForm({ values, onChange, onCalculate }) {
         <div className="w-6 h-6 rounded bg-primary/10 border border-primary/25 flex items-center justify-center">
           <Calculator size={12} className="text-primary" />
         </div>
-        <h3 className="text-xs font-semibold text-slate-800 tracking-wide uppercase">Voltage Drop Inputs</h3>
+        <h3 className="text-xs font-semibold text-slate-800 dark:text-slate-100 tracking-wide uppercase">Voltage Drop Inputs</h3>
       </div>
 
       <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">
@@ -85,7 +83,6 @@ export default function VoltageDropForm({ values, onChange, onCalculate }) {
         onClick={onCalculate}
         className="btn-primary w-full mt-2"
       >
-        <Calculator size={13} className="opacity-80" />
         <span>Calculate</span>
       </button>
     </div>
