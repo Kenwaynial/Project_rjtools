@@ -6,7 +6,7 @@ export default function SegmentCard({ index, segment, onUpdate, onRemove, canRem
   return (
     <div className="bg-white dark:bg-[#0f1629] border border-slate-200/80 dark:border-slate-800/80 rounded-lg p-3 hover:border-primary/30 transition-all duration-200 shadow-sm">
       <div className="flex items-center justify-between mb-2">
-        <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wider">Segment {index + 1}</span>
+        <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wider">Fault {index + 2}</span>
         {canRemove && (
           <button onClick={onRemove} className="text-[0.55rem] font-semibold text-red-500/70 hover:text-red-400 transition-colors uppercase tracking-wider">
             Remove

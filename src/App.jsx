@@ -95,6 +95,14 @@ export default function App() {
     setScValues(prev => ({ ...prev, [field]: value }))
   }, [])
 
+  const handleReset = useCallback(() => {
+    setVdValues({ phaseType: 3, distance: '', current: '', r: '', x: '', sysVoltage: '' })
+    setVdResult(null)
+    setScValues({ kva: '', vll: '', pctZ: '', zFactor: 0.9, unit: 'ft', phaseType: 3 })
+    setSegments([{ id: 0, len: '', c: '', n: 1, conduitType: 'steel' }])
+    setScResult(null)
+  }, [])
+
   const activeTab = view === 'vdrop' ? 'vdrop' : 'shortcircuit'
 
   return (
@@ -131,7 +139,7 @@ export default function App() {
               transition={{ duration: 0.2 }}
               className="flex-1 flex max-w-[1400px] mx-auto w-full px-6 gap-0 pt-5 pb-6"
             >
-              <SidePanel
+                <SidePanel
                 activeTab={activeTab}
                 vdValues={vdValues}
                 onVdChange={handleVdChange}
@@ -143,6 +151,7 @@ export default function App() {
                 onSegmentAdd={addSegment}
                 onSegmentRemove={removeSegment}
                 onScCalculate={handleScCalculate}
+                onReset={handleReset}
               />
 
               <MainPanel

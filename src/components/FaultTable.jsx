@@ -12,7 +12,6 @@ export default function FaultTable({ results }) {
         <thead>
           <tr className="border-b border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 text-[0.65rem] uppercase tracking-wider font-semibold bg-slate-50 dark:bg-slate-800/50">
             <th className="px-5 py-3 font-semibold">Node Point</th>
-            <th className="px-5 py-3 font-semibold">Location / System Node</th>
             <th className="text-right px-5 py-3 font-semibold">Fault Current (Isc)</th>
             <th className="text-right px-5 py-3 font-semibold">Suggested Protection</th>
           </tr>
@@ -29,7 +28,6 @@ export default function FaultTable({ results }) {
               <td className="px-5 py-3.5">
                 <span className="font-bold text-primary text-sm">{r.point}</span>
               </td>
-              <td className="px-5 py-3.5 font-sans text-sm text-slate-800 dark:text-slate-100 font-medium">{r.label}</td>
               <td className="px-5 py-3.5 text-right text-slate-900 dark:text-slate-100 font-bold text-sm">{fmt(r.isc, 2)} A</td>
               <td className="px-5 py-3.5 text-right font-sans">
                 {r.suggestedKAIC ? (
