@@ -30,7 +30,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState('')
 
   const [vdValues, setVdValues] = useState({
-    phaseType: 3, distance: '', current: '', r: '', x: '', sysVoltage: '',
+    phaseType: 3, distance: '', current: '', r: '', x: '', sysVoltage: '', conduitType: 'steel',
   })
   const [vdResult, setVdResult] = useState(null)
 
@@ -96,7 +96,7 @@ export default function App() {
   }, [])
 
   const handleReset = useCallback(() => {
-    setVdValues({ phaseType: 3, distance: '', current: '', r: '', x: '', sysVoltage: '' })
+    setVdValues({ phaseType: 3, distance: '', current: '', r: '', x: '', sysVoltage: '', conduitType: 'steel' })
     setVdResult(null)
     setScValues({ kva: '', vll: '', pctZ: '', zFactor: 0.9, unit: 'ft', phaseType: 3 })
     setSegments([{ id: 0, len: '', c: '', n: 1, conduitType: 'steel' }])

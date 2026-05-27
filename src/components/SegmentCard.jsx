@@ -1,5 +1,27 @@
 import { useState, useEffect, useRef } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { C_VALUES } from '../data/cValues.js'
+
+function DropdownPortal({ children, parentRef, open }) {
+  const [pos, setPos] = useState({ top: 0, left: 0, width: 200 })
+
+  useEffect(() => {
+    if (open && parentRef.current) {
+      const r = parentRef.current.getBoundingClientRect()
+      setPos({ top: r.bottom + 4, left: r.left, width: r.width })
+    }
+  }, [open, parentRef])
+
+  if (!open) return null
+  return (
+    <div
+      style={{ position: 'fixed', top: pos.top, left: pos.left, width: pos.width, zIndex: 9999 }}
+      className="bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg overflow-hidden"
+    >
+      {children}
+    </div>
+  )
+}
 
 function ConduitCombobox({ value, onUpdate }) {
   const [open, setOpen] = useState(false)
@@ -19,34 +41,35 @@ function ConduitCombobox({ value, onUpdate }) {
   }, [])
 
   return (
-    <div className="relative" ref={ref}>
-      <input
-        type="text"
-        value={current.label}
-        onFocus={() => setOpen(true)}
-        onChange={() => {}}
-        placeholder="Select conduit..."
-        className="input-field cursor-pointer select-none"
-        readOnly
-      />
-      {open && (
-        <div className="absolute z-20 left-0 right-0 mt-1 bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg overflow-hidden">
-          {options.map(opt => (
-            <div
-              key={opt.value}
-              onMouseDown={() => {
-                onUpdate('conduitType', opt.value)
-                setOpen(false)
-              }}
-              className={`px-3 py-2 text-[0.7rem] font-sans cursor-pointer hover:bg-primary/10 hover:text-primary transition-colors ${
-                opt.value === value ? 'bg-primary/5 text-primary font-semibold' : 'text-slate-600 dark:text-slate-300'
-              }`}
-            >
-              {opt.label}
-            </div>
-          ))}
-        </div>
-      )}
+    <div ref={ref}>
+      <div className="relative">
+        <input
+          type="text"
+          value={current.label}
+          onFocus={() => setOpen(true)}
+          onChange={() => {}}
+          placeholder="Select conduit..."
+          className="input-field cursor-pointer select-none pr-7"
+          readOnly
+        />
+        <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+      </div>
+      <DropdownPortal parentRef={ref} open={open}>
+        {options.map(opt => (
+          <div
+            key={opt.value}
+            onMouseDown={() => {
+              onUpdate('conduitType', opt.value)
+              setOpen(false)
+            }}
+            className={`px-3 py-2 text-[0.7rem] font-sans cursor-pointer hover:bg-primary/10 hover:text-primary transition-colors ${
+              opt.value === value ? 'bg-primary/5 text-primary font-semibold' : 'text-slate-600 dark:text-slate-300'
+            }`}
+          >
+            {opt.label}
+          </div>
+        ))}
+      </DropdownPortal>
     </div>
   )
 }
@@ -82,22 +105,25 @@ function CValueCombobox({ value, options, onUpdate }) {
   })
 
   return (
-    <div className="relative" ref={ref}>
-      <input
-        type="text"
-        value={displayText}
-        onChange={e => {
-          setDisplayText(e.target.value)
-          const num = e.target.value.replace(/[^0-9.]/g, '')
-          onUpdate('c', num ? Number(num) : '')
-          setOpen(true)
-        }}
-        onFocus={() => setOpen(true)}
-        placeholder="Type or select..."
-        className="input-field"
-      />
-      {open && filtered.length > 0 && (
-        <div className="absolute z-20 left-0 right-0 mt-1 bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg max-h-44 overflow-y-auto">
+    <div ref={ref}>
+      <div className="relative">
+        <input
+          type="text"
+          value={displayText}
+          onChange={e => {
+            setDisplayText(e.target.value)
+            const num = e.target.value.replace(/[^0-9.]/g, '')
+            onUpdate('c', num ? Number(num) : '')
+            setOpen(true)
+          }}
+          onFocus={() => setOpen(true)}
+          placeholder="Type or select..."
+          className="input-field pr-7"
+        />
+        <ChevronDown size={12} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+      </div>
+      <DropdownPortal parentRef={ref} open={open && filtered.length > 0}>
+        <div className="max-h-44 overflow-y-auto">
           <div className="py-0.5 px-2 text-[0.55rem] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
             {filtered.length} match{filtered.length !== 1 ? 'es' : ''}
           </div>
@@ -118,7 +144,7 @@ function CValueCombobox({ value, options, onUpdate }) {
             </div>
           ))}
         </div>
-      )}
+      </DropdownPortal>
     </div>
   )
 }
