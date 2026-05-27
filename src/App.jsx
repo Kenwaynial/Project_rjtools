@@ -101,7 +101,7 @@ export default function App() {
     <>
       {!agreed && <SplashScreen onAgree={() => setAgreed(true)} />}
 
-      <div className="min-h-screen bg-[#f8fafc] dark:bg-[#0f172a] flex flex-col">
+      <div className="min-h-screen bg-[#f8fafc] dark:bg-[#060b17] flex flex-col">
         <Header
           view={view}
           onNavigate={navigate}

@@ -5,7 +5,7 @@ export default function Header({ view, onNavigate, onSearch, theme, onToggleThem
   const [searchFocused, setSearchFocused] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-700/80">
+    <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0a0f1e]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80">
       <div className="max-w-[1400px] mx-auto px-6 h-14 flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           {view !== 'dashboard' && (

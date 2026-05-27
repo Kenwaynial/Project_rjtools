@@ -12,14 +12,14 @@ const fadeUp = {
 export default function MainPanel({ activeTab, vdResult, scResult, vdValues }) {
   if (activeTab === 'vdrop') {
     return (
-      <main className="flex-1 bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-xl p-6 flex flex-col gap-5 min-w-0 overflow-y-auto shadow-sm">
+      <main className="flex-1 bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded-xl p-6 flex flex-col gap-5 min-w-0 overflow-y-auto shadow-sm">
         <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight">Voltage Drop Result</h2>
 
         <AnimatePresence mode="wait">
           {vdResult ? (
             <motion.div key="vd-result" {...fadeUp} className="flex flex-col gap-4">
-              <div className="bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm">
-                <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between">
+              <div className="bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
+                <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30 flex items-center justify-between">
                   <span className="text-[0.65rem] font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider">Voltage Drop Summary Table</span>
                   <span className={`text-[0.6rem] font-bold px-2.5 py-0.5 rounded-md ${
                     vdResult.percent <= 3 ? 'text-green bg-green/10 border border-green/20' : 'text-amber bg-amber/10 border border-amber/20'
@@ -95,14 +95,14 @@ export default function MainPanel({ activeTab, vdResult, scResult, vdValues }) {
   }
 
   return (
-    <main className="flex-1 bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-xl p-6 flex flex-col gap-5 min-w-0 overflow-y-auto shadow-sm">
+    <main className="flex-1 bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded-xl p-6 flex flex-col gap-5 min-w-0 overflow-y-auto shadow-sm">
       <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 tracking-tight">Short Circuit Result</h2>
 
       <AnimatePresence mode="wait">
         {scResult ? (
           <motion.div key="sc-result" {...fadeUp} className="flex flex-col gap-4">
             <FaultTable results={scResult.results} />
-            <StepsPanel steps={scResult.steps} />
+            <StepsPanel scResult={scResult} />
           </motion.div>
         ) : (
           <motion.div key="sc-empty" {...fadeUp} className="flex-1 flex items-center justify-center">
@@ -120,8 +120,8 @@ export default function MainPanel({ activeTab, vdResult, scResult, vdValues }) {
 }
 function StepCard({ label, steps }) {
   return (
-    <div className="bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
-      <h4 className="text-xs font-semibold text-slate-800 dark:text-slate-100 uppercase tracking-wider mb-4 pb-2 border-b border-slate-100 dark:border-slate-700/50">{label}</h4>
+    <div className="bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
+      <h4 className="text-xs font-semibold text-slate-800 dark:text-slate-100 uppercase tracking-wider mb-4 pb-2 border-b border-slate-100 dark:border-slate-800/50">{label}</h4>
       <div className="relative pl-4 border-l border-slate-200 dark:border-slate-700 space-y-4 ml-2.5">
         {steps.map((s, i) => {
           const title = s.var === 'Vd' ? 'Step 1: Calculate Total Conductor Voltage Drop' : 'Step 2: Calculate Percentage Voltage Drop';
@@ -139,7 +139,7 @@ function StepCard({ label, steps }) {
                 <p className="text-[0.65rem] text-slate-500 dark:text-slate-400 leading-relaxed mt-1 mb-2">
                   {desc}
                 </p>
-                <div className="bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded p-2 font-mono text-[0.65rem] flex flex-wrap items-center gap-1.5 overflow-x-auto text-slate-800 dark:text-slate-100">
+                <div className="bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded p-2 font-mono text-[0.65rem] flex flex-wrap items-center gap-1.5 overflow-x-auto text-slate-800 dark:text-slate-100">
                   <span className="text-primary font-semibold">{s.var}</span>
                   <span className="text-amber font-semibold">=</span>
                   <span className="text-slate-600 dark:text-slate-400 break-all">{s.expr}</span>

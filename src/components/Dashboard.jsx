@@ -65,7 +65,7 @@ export default function Dashboard({ onNavigate, searchQuery }) {
                 onClick={() => onNavigate(tool.id)}
                 className="group cursor-pointer text-left"
               >
-                <div className="bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-xl p-6 hover:border-primary/30 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 hover:shadow-md transition-all duration-200 shadow-sm">
+                <div className="bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded-xl p-6 hover:border-primary/30 hover:bg-slate-50/50 dark:hover:bg-slate-800/30 hover:shadow-md transition-all duration-200 shadow-sm">
                   <div className="flex items-start justify-between mb-4">
                     <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${tool.color} flex items-center justify-center`}>
                       <Icon size={18} className="text-white" />

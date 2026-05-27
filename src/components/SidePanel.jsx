@@ -8,7 +8,7 @@ export default function SidePanel({
   onSegmentAdd, onSegmentRemove, onScCalculate,
 }) {
   return (
-    <aside className="w-[35%] min-w-[320px] max-w-[400px] max-h-[calc(100vh-6rem)] bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-xl p-5 mr-5 flex flex-col gap-4 overflow-y-auto sticky top-[4.5rem] self-start shadow-sm">
+    <aside className="w-[35%] min-w-[320px] max-w-[400px] max-h-[calc(100vh-6rem)] bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded-xl p-5 mr-5 flex flex-col gap-4 overflow-y-auto sticky top-[4.5rem] self-start shadow-sm">
       <AnimatePresence mode="wait">
         {activeTab === 'vdrop' ? (
           <motion.div

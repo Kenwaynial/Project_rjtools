@@ -14,7 +14,7 @@ export default function ShortCircuitForm({
         <h3 className="text-xs font-semibold text-slate-800 dark:text-slate-100 tracking-wide uppercase">Short Circuit Inputs</h3>
       </div>
 
-      <div className="bg-slate-50/60 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-700/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
+      <div className="bg-slate-50/60 dark:bg-slate-800/20 border border-slate-200/80 dark:border-slate-700/40 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
         <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">System Settings</span>
         <div className="grid grid-cols-3 gap-2">
           <div>
@@ -52,7 +52,7 @@ export default function ShortCircuitForm({
         </div>
       </div>
 
-      <div className="bg-slate-50/60 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-700/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
+      <div className="bg-slate-50/60 dark:bg-slate-800/20 border border-slate-200/80 dark:border-slate-700/40 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
         <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">Transformer Base</span>
         <div className="grid grid-cols-3 gap-2">
           {[
@@ -74,7 +74,7 @@ export default function ShortCircuitForm({
         </div>
       </div>
 
-      <div className="bg-slate-50/60 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-700/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
+      <div className="bg-slate-50/60 dark:bg-slate-800/20 border border-slate-200/80 dark:border-slate-700/40 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
         <div className="flex items-center gap-2 mb-1">
           <Cable size={12} className="text-primary/75" />
           <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">Conductor Segments</span>

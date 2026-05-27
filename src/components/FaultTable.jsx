@@ -3,7 +3,7 @@ import { fmt } from '../utils/fmt.js'
 
 export default function FaultTable({ results }) {
   return (
-    <div className="bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm">
+    <div className="bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-sm">
       <div className="px-5 py-3.5 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between">
         <span className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider">Symmetrical Short-Circuit Profiles</span>
         <span className="text-[0.65rem] font-medium text-slate-500 dark:text-slate-400">Calculated Node Levels</span>

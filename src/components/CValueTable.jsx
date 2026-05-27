@@ -6,7 +6,7 @@ export default function CValueTable({ conduitType }) {
   const conv = conduitType === 'nonmagnetic' ? 'Non-Magnetic' : 'Steel'
 
   return (
-    <details className="mt-1 bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden shadow-sm">
+    <details className="mt-1 bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded-lg overflow-hidden shadow-sm">
       <summary className="text-[0.55rem] text-primary font-bold px-3 py-1.5 cursor-pointer select-none hover:text-primary-dark transition-colors">
         C Value Reference - {conv}
       </summary>
