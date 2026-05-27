@@ -34,7 +34,7 @@ export default function Header({ view, onNavigate, onSearch, theme, onToggleThem
               onFocus={() => setSearchFocused(true)}
               onBlur={() => setSearchFocused(false)}
               onChange={e => onSearch?.(e.target.value)}
-              className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all focus:bg-white dark:focus:bg-[#1e293b] focus:border-primary focus:shadow-[0_0_0_1px_#4f46e5,0_0_12px_rgba(79,70,229,0.05)]"
+              className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 rounded-lg pl-9 pr-3 py-1.5 text-xs text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all focus:bg-white dark:focus:bg-[#1e293b] focus:border-primary focus:shadow-[0_0_0_1px_#1e3a5f,0_0_12px_rgba(30,58,95,0.05)]"
             />
           </div>
         </div>
