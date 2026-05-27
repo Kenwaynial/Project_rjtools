@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { BarChart3 } from 'lucide-react'
+import { BarChart3, Calculator } from 'lucide-react'
 import FaultTable from './FaultTable.jsx'
 import StepsPanel from './StepsPanel.jsx'
 
@@ -74,7 +74,7 @@ export default function MainPanel({ activeTab, vdResult, scResult, vdValues }) {
                 </table>
               </div>
 
-              <StepCard label="Step-by-Step Solution" steps={[
+              <StepCard label="Calculation Method — Voltage Drop Derivation" steps={[
                 { var: 'Vd', expr: `${vdValues.phaseType == 1 ? '2' : '√3'} × ${vdValues.distance} × ${vdValues.current} × √(R²+X²) / 305`, result: `${vdResult.vDrop.toFixed(3)} V` },
                 { var: '%', expr: `${vdResult.vDrop.toFixed(3)} / ${vdValues.sysVoltage} × 100`, result: `${vdResult.percent.toFixed(2)}%` },
               ]} />
@@ -121,37 +121,23 @@ export default function MainPanel({ activeTab, vdResult, scResult, vdValues }) {
 function StepCard({ label, steps }) {
   return (
     <div className="bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
-      <h4 className="text-xs font-semibold text-slate-800 dark:text-slate-100 uppercase tracking-wider mb-4 pb-2 border-b border-slate-100 dark:border-slate-800/50">{label}</h4>
-      <div className="relative pl-4 border-l border-slate-200 dark:border-slate-700 space-y-4 ml-2.5">
-        {steps.map((s, i) => {
-          const title = s.var === 'Vd' ? 'Step 1: Calculate Total Conductor Voltage Drop' : 'Step 2: Calculate Percentage Voltage Drop';
-          const desc = s.var === 'Vd'
-            ? 'Determine the voltage drop across the system using the phase coefficient, distance, current, and conductor impedance properties.'
-            : 'Convert the computed voltage drop into a percentage of the source voltage to evaluate national standard compliance.';
-
-          return (
-            <div key={i} className="relative group">
-              <div className="absolute -left-[27px] top-1 w-4 h-4 rounded-full bg-slate-50 dark:bg-slate-800 border border-primary/30 text-primary flex items-center justify-center">
-                <span className="text-[0.45rem] font-bold">{i + 1}</span>
-              </div>
-              <div className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 rounded-lg p-3 hover:border-primary/20 transition-colors">
-                <h5 className="text-[0.7rem] font-bold text-slate-800 dark:text-slate-100 tracking-wide">{title}</h5>
-                <p className="text-[0.65rem] text-slate-500 dark:text-slate-400 leading-relaxed mt-1 mb-2">
-                  {desc}
-                </p>
-                <div className="bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-800 rounded p-2 font-mono text-[0.65rem] flex flex-wrap items-center gap-1.5 overflow-x-auto text-slate-800 dark:text-slate-100">
-                  <span className="text-primary font-semibold">{s.var}</span>
-                  <span className="text-amber font-semibold">=</span>
-                  <span className="text-slate-600 dark:text-slate-400 break-all">{s.expr}</span>
-                  <span className="text-amber font-semibold">=</span>
-                  <span className="text-green font-bold bg-green/10 border border-green/20 px-1.5 py-0.5 rounded text-[0.6rem] whitespace-nowrap">
-                    {s.result}
-                  </span>
-                </div>
-              </div>
-            </div>
-          )
-        })}
+      <div className="flex items-center gap-2 mb-4 pb-2.5 border-b border-slate-100 dark:border-slate-800/50">
+        <Calculator size={13} className="text-primary" />
+        <h4 className="text-xs font-semibold text-slate-800 dark:text-slate-100 uppercase tracking-wider">{label}</h4>
+      </div>
+      <div className="flex flex-col gap-2.5">
+        {steps.map((s, i) => (
+          <div
+            key={i}
+            className="bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 rounded-lg px-4 py-3 font-mono text-xs leading-relaxed text-slate-700 dark:text-slate-300"
+          >
+            <span className="text-primary font-semibold">{s.var}</span>
+            <span className="text-amber mx-1">=</span>
+            <span className="break-all">{s.expr}</span>
+            <span className="text-amber mx-1">=</span>
+            <span className="text-green font-bold">{s.result}</span>
+          </div>
+        ))}
       </div>
     </div>
   )
