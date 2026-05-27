@@ -107,7 +107,7 @@ export default function App() {
 
   return (
     <>
-      {!agreed && <SplashScreen onAgree={() => setAgreed(true)} />}
+      {!agreed && <SplashScreen onAgree={() => setAgreed(true)} theme={theme} />}
 
       <div className="min-h-screen bg-[#f8fafc] dark:bg-[#060b17] flex flex-col">
         <Header

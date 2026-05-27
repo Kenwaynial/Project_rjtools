@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 
-export default function SplashScreen({ onAgree }) {
+export default function SplashScreen({ onAgree, theme }) {
   const [exiting, setExiting] = useState(false)
+  const logoSrc = theme === 'dark' ? '/images/logo_light.png' : '/images/logo_dark.png'
 
   const handleAgree = () => {
     setExiting(true)
@@ -32,7 +33,7 @@ export default function SplashScreen({ onAgree }) {
             <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-32 h-32 bg-primary/30 rounded-full blur-3xl pointer-events-none" />
 
             <motion.img
-              src="/images/icon.png"
+              src={logoSrc}
               alt="RJ Tools"
               className="w-14 h-14 relative"
               initial={{ rotate: -20, scale: 0 }}

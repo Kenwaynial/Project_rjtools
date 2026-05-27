@@ -3,6 +3,7 @@ import { Search, ArrowLeft, Zap, ShieldCheck, Sun, Moon } from 'lucide-react'
 
 export default function Header({ view, onNavigate, onSearch, theme, onToggleTheme }) {
   const [searchFocused, setSearchFocused] = useState(false)
+  const logoSrc = theme === 'dark' ? '/images/logo_light.png' : '/images/logo_dark.png'
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0a0f1e]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80">
@@ -20,7 +21,7 @@ export default function Header({ view, onNavigate, onSearch, theme, onToggleThem
             onClick={() => onNavigate('dashboard')}
             className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <img src="/images/icon.png" alt="RJ Tools" className="w-8 h-8" />
+            <img src={logoSrc} alt="RJ Tools" className="w-8 h-8" />
             <span className="font-bold text-base text-slate-800 dark:text-slate-100 tracking-tight group-hover:text-primary transition-colors">RJ Tools</span>
           </div>
         </div>
