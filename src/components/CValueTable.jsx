@@ -6,23 +6,23 @@ export default function CValueTable({ conduitType }) {
   const conv = conduitType === 'nonmagnetic' ? 'Non-Magnetic' : 'Steel'
 
   return (
-    <details className="mt-1 bg-black border border-white/[0.06] rounded-lg overflow-hidden">
-      <summary className="text-[0.55rem] text-primary font-semibold px-3 py-1.5 cursor-pointer select-none hover:text-primary-dark transition-colors">
+    <details className="mt-1 bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm">
+      <summary className="text-[0.55rem] text-primary font-bold px-3 py-1.5 cursor-pointer select-none hover:text-primary-dark transition-colors">
         C Value Reference - {conv}
       </summary>
-      <div className="max-h-[160px] overflow-y-auto border-t border-white/[0.06]">
+      <div className="max-h-[160px] overflow-y-auto border-t border-slate-200">
         <table className="w-full text-[0.5rem]">
-          <thead className="sticky top-0 bg-black">
-            <tr className="text-muted border-b border-white/[0.06]">
-              <th className="text-left px-3 py-1 font-medium">Conductor</th>
-              <th className="text-right px-3 py-1 font-medium">C ({conv})</th>
+          <thead className="sticky top-0 bg-slate-50">
+            <tr className="text-slate-500 border-b border-slate-200 font-semibold">
+              <th className="text-left px-3 py-1.5 font-medium">Conductor</th>
+              <th className="text-right px-3 py-1.5 font-medium">C ({conv})</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-slate-100">
             {data.map(([name]) => (
-              <tr key={name} className="border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors">
-                <td className="px-3 py-1 text-white/80">{name}</td>
-                <td className="px-3 py-1 text-right font-mono text-primary">
+              <tr key={name} className="hover:bg-slate-50/50 transition-colors">
+                <td className="px-3 py-1.5 text-slate-700 font-medium">{name}</td>
+                <td className="px-3 py-1.5 text-right font-mono text-primary font-bold">
                   {fmt(C_VALUES[conduitType][name])}
                 </td>
               </tr>

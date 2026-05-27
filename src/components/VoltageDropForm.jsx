@@ -9,7 +9,7 @@ export default function VoltageDropForm({ values, onChange, onCalculate }) {
         <div className="w-6 h-6 rounded bg-primary/10 border border-primary/25 flex items-center justify-center">
           <Calculator size={12} className="text-primary" />
         </div>
-        <h3 className="text-xs font-semibold text-white tracking-wide uppercase">Voltage Drop Inputs</h3>
+        <h3 className="text-xs font-semibold text-slate-800 tracking-wide uppercase">Voltage Drop Inputs</h3>
       </div>
 
       <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">

@@ -83,7 +83,7 @@ export default function App() {
   const activeTab = view === 'vdrop' ? 'vdrop' : 'shortcircuit'
 
   return (
-    <div className="min-h-screen bg-dark-bg flex flex-col">
+    <div className="min-h-screen bg-[#f8fafc] flex flex-col">
       <Header view={view} onNavigate={navigate} onSearch={setSearchQuery} />
 
       <AnimatePresence mode="wait">

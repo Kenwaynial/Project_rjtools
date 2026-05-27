@@ -44,10 +44,10 @@ export default function Dashboard({ onNavigate, searchQuery }) {
           transition={{ duration: 0.4 }}
           className="mb-12"
         >
-          <h1 className="text-4xl font-bold text-white tracking-tight">Electrical Tools</h1>
-          <p className="text-muted text-sm mt-2">Select a tool to get started with your calculations.</p>
+          <h1 className="text-4xl font-bold text-slate-800 tracking-tight">Electrical Tools</h1>
+          <p className="text-slate-500 text-sm mt-2">Select a tool to get started with your calculations.</p>
         </motion.div>
-
+ 
         <motion.div
           variants={container}
           initial="hidden"
@@ -65,18 +65,18 @@ export default function Dashboard({ onNavigate, searchQuery }) {
                 onClick={() => onNavigate(tool.id)}
                 className="group cursor-pointer text-left"
               >
-                <div className="bg-[#0d0d0d] border border-white/[0.06] rounded-xl p-6 hover:border-primary/20 hover:bg-[#171717] transition-all duration-200">
+                <div className="bg-white border border-slate-200 rounded-xl p-6 hover:border-primary/30 hover:bg-slate-50/50 hover:shadow-md transition-all duration-200 shadow-sm">
                   <div className="flex items-start justify-between mb-4">
                     <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${tool.color} flex items-center justify-center`}>
                       <Icon size={18} className="text-white" />
                     </div>
-                    <span className="text-xs text-muted">{tool.stats}</span>
+                    <span className="text-xs text-slate-400 font-semibold">{tool.stats}</span>
                   </div>
-
-                  <h3 className="text-base font-semibold text-white mb-1.5">{tool.title}</h3>
-                  <p className="text-sm text-muted leading-relaxed mb-4">{tool.desc}</p>
-
-                  <div className="flex items-center gap-1 text-xs font-medium text-primary group-hover:gap-2 transition-all">
+ 
+                  <h3 className="text-base font-bold text-slate-800 mb-1.5">{tool.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed mb-4">{tool.desc}</p>
+ 
+                  <div className="flex items-center gap-1 text-xs font-semibold text-primary group-hover:gap-2 transition-all">
                     Open Tool <ArrowRight size={11} />
                   </div>
                 </div>
@@ -84,20 +84,20 @@ export default function Dashboard({ onNavigate, searchQuery }) {
             )
           })}
         </motion.div>
-
+ 
         {filtered.length === 0 && (
           <div className="text-center py-16">
-            <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center mx-auto mb-3">
-              <svg className="w-5 h-5 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center mx-auto mb-3">
+              <svg className="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
             </div>
-            <p className="text-muted text-sm">No tools match your search.</p>
+            <p className="text-slate-400 text-sm">No tools match your search.</p>
           </div>
         )}
       </div>
-
-      <div className="mt-auto border-t border-white/[0.06] py-4 px-6">
-        <div className="max-w-[1000px] mx-auto flex items-center justify-between text-xs text-muted">
-          <span className="text-white/20">RJ Electrical Tools v2.0</span>
+ 
+      <div className="mt-auto border-t border-slate-200 py-4 px-6">
+        <div className="max-w-[1000px] mx-auto flex items-center justify-between text-xs text-slate-400">
+          <span className="text-slate-300">RJ Electrical Tools v2.0</span>
         </div>
       </div>
     </div>

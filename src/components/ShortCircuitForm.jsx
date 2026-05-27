@@ -11,12 +11,12 @@ export default function ShortCircuitForm({
         <div className="w-6 h-6 rounded bg-primary/10 border border-primary/25 flex items-center justify-center">
           <Triangle size={12} className="text-primary" />
         </div>
-        <h3 className="text-xs font-semibold text-white tracking-wide uppercase">Short Circuit Inputs</h3>
+        <h3 className="text-xs font-semibold text-slate-800 tracking-wide uppercase">Short Circuit Inputs</h3>
       </div>
 
       {/* System Settings Group */}
-      <div className="bg-[#050505]/60 border border-white/[0.04] p-3 rounded-lg flex flex-col gap-2.5">
-        <span className="text-[0.6rem] font-semibold text-primary/80 uppercase tracking-wide">System Settings</span>
+      <div className="bg-slate-50/60 border border-slate-200/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
+        <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">System Settings</span>
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="label-sm block mb-1">Unit</label>
@@ -43,8 +43,8 @@ export default function ShortCircuitForm({
       </div>
 
       {/* Transformer Section */}
-      <div className="bg-[#050505]/60 border border-white/[0.04] p-3 rounded-lg flex flex-col gap-2.5">
-        <span className="text-[0.6rem] font-semibold text-primary/80 uppercase tracking-wide">Transformer Base</span>
+      <div className="bg-slate-50/60 border border-slate-200/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
+        <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">Transformer Base</span>
         <div className="grid grid-cols-3 gap-2">
           {[
             { key: 'kva', label: 'kVA' },
@@ -66,10 +66,10 @@ export default function ShortCircuitForm({
       </div>
 
       {/* Cable Segments Section */}
-      <div className="bg-[#050505]/60 border border-white/[0.04] p-3 rounded-lg flex flex-col gap-2.5">
+      <div className="bg-slate-50/60 border border-slate-200/80 p-3 rounded-lg flex flex-col gap-2.5 shadow-sm">
         <div className="flex items-center gap-2 mb-1">
           <Cable size={12} className="text-primary/75" />
-          <span className="text-[0.6rem] font-semibold text-primary/80 uppercase tracking-wide">Conductor Segments</span>
+          <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">Conductor Segments</span>
         </div>
 
         <div className="flex flex-col gap-2.5 max-h-[220px] overflow-y-auto pr-1">
