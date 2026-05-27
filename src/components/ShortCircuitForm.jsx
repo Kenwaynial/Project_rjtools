@@ -80,7 +80,7 @@ export default function ShortCircuitForm({
           <span className="text-[0.6rem] font-bold text-primary uppercase tracking-wide">Conductor Segments</span>
         </div>
 
-        <div className="flex flex-col gap-2.5 max-h-[220px] overflow-y-auto pr-1">
+        <div className="flex flex-col gap-2.5">
           {segments.map((seg, idx) => (
             <SegmentCard
               key={seg.id}
