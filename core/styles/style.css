@@ -442,3 +442,80 @@ button:hover {
   .app-main, .content { max-width: 100vw; padding: 1rem 0.5rem; }
   .calculator-section { max-width: 100vw; padding: 1rem 0.5rem; }
 }
+
+/* ====== Tab Panel ====== */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ====== Short Circuit Segments ====== */
+.sc-segment {
+  background: #222;
+  border-radius: 8px;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #333;
+}
+.sc-segment h5 {
+  margin: 0 0 0.3rem 0;
+  color: #8e7cff;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.sc-segment input, .sc-segment select {
+  margin: 0.25rem 0;
+}
+.sc-conductor {
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  background: #181818;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 6px;
+  width: 100%;
+  cursor: pointer;
+}
+.sc-conductor option {
+  background: #181818;
+  color: #fff;
+}
+.remove-seg {
+  background: #522 !important;
+  color: #fff !important;
+  border: 1px solid #733 !important;
+  font-size: 0.85rem !important;
+  padding: 0.35rem !important;
+  margin-top: 0.25rem !important;
+}
+
+/* ====== Short Circuit Results Table ====== */
+.sc-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #fff;
+  font-size: 0.95rem;
+}
+.sc-table th {
+  background: #23213a;
+  padding: 0.7rem;
+  text-align: left;
+  border-bottom: 2px solid #8e7cff;
+  color: #8e7cff;
+  font-weight: 600;
+}
+.sc-table td {
+  padding: 0.6rem 0.7rem;
+  border-bottom: 1px solid #333;
+}
+.sc-table tbody tr:hover {
+  background: #1a1a2e;
+}
+.sc-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.sc-results-box {
+  background: linear-gradient(90deg, #23213a 60%, #181818 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border-top: 1px solid #23213a;
+  box-shadow: 0 4px 24px #8e7cff22, 0 1.5px 8px #0003;
+}

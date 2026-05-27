@@ -23,7 +23,7 @@
   </header>
   <div class="app-main">
     <aside class="sidebar">
-      <form id="vdropForm" class="calculator-section">
+      <form id="vdropForm" class="calculator-section tab-panel active" data-tab="vdrop">
         <h3>Voltage Drop Calculator</h3>
         <label>Phase Type
           <select id="phaseType">
@@ -38,41 +38,126 @@
         <input type="number" id="sysVoltage" placeholder="System Voltage (V)">
         <button type="button" onclick="calculateVDrop()">Calculate</button>
       </form>
+
+      <form id="scForm" class="calculator-section tab-panel" data-tab="shortcircuit" onsubmit="return false;">
+        <h3>Short Circuit Calculator</h3>
+
+        <label>Fault Type
+          <select id="scFaultType">
+            <option value="3ph">3-Phase</option>
+          </select>
+        </label>
+
+        <label>Unit
+          <select id="scUnit">
+            <option value="ft">Feet</option>
+            <option value="m">Meters</option>
+          </select>
+        </label>
+
+        <h4 style="color:#8e7cff;margin:1rem 0 0.5rem 0;font-size:0.95rem;">Transformer</h4>
+        <input type="number" id="scKva" placeholder="Transformer kVA" step="any">
+        <input type="number" id="scVll" placeholder="Secondary VLL (V)" step="any">
+        <input type="number" id="scPctZ" placeholder="%Z Impedance" step="any">
+        <label>Z Factor (0.8–1.2)
+          <input type="number" id="scZFactor" value="0.9" min="0.8" max="1.2" step="0.05">
+        </label>
+
+        <h4 style="color:#8e7cff;margin:1rem 0 0.5rem 0;font-size:0.95rem;">Cable Segments</h4>
+        <div id="scSegments"></div>
+        <button type="button" onclick="addSegment()" style="background:#333;color:#fff;border:1px dashed #555;font-size:0.95rem;">+ Add Segment</button>
+
+        <details style="margin-top:0.8rem;background:#222;border-radius:8px;padding:0.5rem;border:1px solid #333;font-size:0.85rem;cursor:pointer;">
+          <summary style="color:#8e7cff;font-weight:600;">C Value Reference — Cu in Steel Conduit at 600V</summary>
+          <table style="width:100%;border-collapse:collapse;margin-top:0.5rem;font-size:0.8rem;">
+            <tr><th style="text-align:left;padding:0.3rem;border-bottom:1px solid #444;color:#aaa;">Conductor</th><th style="text-align:right;padding:0.3rem;border-bottom:1px solid #444;color:#aaa;">C (Steel)</th></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">#14 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">389</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">#12 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">617</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">#10 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">981</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">#8 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">1,557</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">#6 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">2,425</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">#4 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">3,806</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">#3 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">4,774</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">#2 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">5,907</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">#1 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">7,293</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">1/0 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">8,925</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">2/0 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">10,755</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">3/0 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">12,844</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">4/0 AWG</td><td style="text-align:right;padding:0.25rem 0.3rem;">15,082</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">250 kcmil</td><td style="text-align:right;padding:0.25rem 0.3rem;">16,483</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">300 kcmil</td><td style="text-align:right;padding:0.25rem 0.3rem;">18,177</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">350 kcmil</td><td style="text-align:right;padding:0.25rem 0.3rem;">19,704</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">400 kcmil</td><td style="text-align:right;padding:0.25rem 0.3rem;">20,566</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">500 kcmil</td><td style="text-align:right;padding:0.25rem 0.3rem;">22,185</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">600 kcmil</td><td style="text-align:right;padding:0.25rem 0.3rem;">22,965</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">750 kcmil</td><td style="text-align:right;padding:0.25rem 0.3rem;">24,137</td></tr>
+            <tr><td style="padding:0.25rem 0.3rem;">1,000 kcmil</td><td style="text-align:right;padding:0.25rem 0.3rem;">25,278</td></tr>
+          </table>
+          <p style="margin:0.3rem 0 0;color:#888;font-size:0.75rem;">Bussmann — Cu in steel conduit at 600V</p>
+        </details>
+
+        <button type="button" onclick="calculateSC()" style="margin-top:0.8rem;">Calculate</button>
+      </form>
     </aside>
     <main class="content">
+      <nav class="content-nav">
+        <div class="nav-tabs">
+          <a href="#" class="tab active" data-tab="vdrop" onclick="return switchTab('vdrop')">Voltage Drop</a>
+          <a href="#" class="tab" data-tab="shortcircuit" onclick="return switchTab('shortcircuit')">Short Circuit</a>
+        </div>
+      </nav>
 
       <div class="app-content">
-        <section class="result-section" id="resultSection">
-          <h2>Voltage Drop Result</h2>
-          <div id="vdropResult" class="result-box premium-result">
-            <div class="result-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8e7cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8L21 10h-9l1-8z"/></svg>
+
+        <div class="tab-panel active" data-tab="vdrop">
+          <section class="result-section" id="resultSection">
+            <h2>Voltage Drop Result</h2>
+            <div id="vdropResult" class="result-box premium-result">
+              <div class="result-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8e7cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8L21 10h-9l1-8z"/></svg>
+              </div>
+              <div class="result-content">
+                <p class="result-main">Result will show here after calculation.</p>
+              </div>
             </div>
-            <div class="result-content">
-              <p class="result-main">Result will show here after calculation.</p>
+          </section>
+          <div style="height: 2.5rem;"></div>
+          <div class="solution-align">
+            <h4>Instructions</h4>
+            <div class="solution-steps">
+              <ol>
+                <li>Select if your system is Single Phase or Three Phase.</li>
+                <li>Enter the distance, current, R, X, and voltage values.</li>
+                <li>Click Calculate to see the voltage drop and percent drop.</li>
+              </ol>
             </div>
-          </div>
-        </section>
-        <div style="height: 2.5rem;"></div>
-        <div class="solution-align">
-          <h4>Instructions</h4>
-          <div class="solution-steps">
-            <ol>
-              <li>Select if your system is Single Phase or Three Phase.</li>
-              <li>Enter the distance, current, R, X, and voltage values.</li>
-              <li>Click Calculate to see the voltage drop and percent drop.</li>
-            </ol>
-          </div>
-          <div class="formula-used" style="margin-top:2.2rem;">
-            <h4 style="margin-bottom:0.7rem;">Formula Used</h4>
-            <img src="/core/images/vdFormula.png" alt="Voltage Drop Formula" style="max-width:320px;width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;" />
+            <div class="formula-used" style="margin-top:2.2rem;">
+              <h4 style="margin-bottom:0.7rem;">Formula Used</h4>
+              <img src="/core/images/vdFormula.png" alt="Voltage Drop Formula" style="max-width:320px;width:100%;border-radius:8px;box-shadow:0 2px 8px #0002;" />
+            </div>
           </div>
         </div>
+
+        <div class="tab-panel" data-tab="shortcircuit">
+          <section class="result-section" id="scSection">
+            <h2>Short Circuit Result</h2>
+            <div id="scResult">
+              <div class="result-box premium-result">
+                <div class="result-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffb86c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13,2 3,14 11,14 11,22 21,10 13,10"/></svg>
+                </div>
+                <div class="result-content">
+                  <p class="result-main">Results will show here after calculation.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
       </div>
     </main>
   </div>
   <script src="/core/scripts/script.js"></script>
-</div>
   <div class="disclaimer">
     Disclaimer: This tool is for informational purposes only. Always verify results with a licensed professional before making electrical decisions. No liability for errors or misuse.
   </div>
