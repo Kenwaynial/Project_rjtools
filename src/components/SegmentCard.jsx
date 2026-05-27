@@ -1,6 +1,56 @@
 import { useState, useEffect, useRef } from 'react'
 import { C_VALUES } from '../data/cValues.js'
 
+function ConduitCombobox({ value, onUpdate }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+  const options = [
+    { value: 'steel', label: 'Steel' },
+    { value: 'nonmagnetic', label: 'Non Magnetic' },
+  ]
+  const current = options.find(o => o.value === value) || options[0]
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  return (
+    <div className="relative" ref={ref}>
+      <input
+        type="text"
+        value={current.label}
+        onFocus={() => setOpen(true)}
+        onChange={() => {}}
+        placeholder="Select conduit..."
+        className="input-field cursor-pointer select-none"
+        readOnly
+      />
+      {open && (
+        <div className="absolute z-20 left-0 right-0 mt-1 bg-white dark:bg-[#0f1629] border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg overflow-hidden">
+          {options.map(opt => (
+            <div
+              key={opt.value}
+              onMouseDown={() => {
+                onUpdate('conduitType', opt.value)
+                setOpen(false)
+              }}
+              className={`px-3 py-2 text-[0.7rem] font-sans cursor-pointer hover:bg-primary/10 hover:text-primary transition-colors ${
+                opt.value === value ? 'bg-primary/5 text-primary font-semibold' : 'text-slate-600 dark:text-slate-300'
+              }`}
+            >
+              {opt.label}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function CValueCombobox({ value, options, onUpdate }) {
   const [open, setOpen] = useState(false)
   const [displayText, setDisplayText] = useState('')
@@ -114,14 +164,10 @@ export default function SegmentCard({ index, segment, onUpdate, onRemove, canRem
       <div className="grid grid-cols-2 gap-2">
         <div>
           <label className="label-sm block mb-0.5">Conduit</label>
-          <select
+          <ConduitCombobox
             value={segment.conduitType || 'steel'}
-            onChange={e => onUpdate('conduitType', e.target.value)}
-            className="input-field select-arrow cursor-pointer"
-          >
-            <option value="steel">Steel</option>
-            <option value="nonmagnetic">Non-Mag</option>
-          </select>
+            onUpdate={onUpdate}
+          />
         </div>
         <div>
           <label className="label-sm block mb-0.5">C Value</label>
